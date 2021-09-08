@@ -33,7 +33,7 @@
             android:clickable="true"
             android:contentDescription="@string/set_filter_to_animals_list"
             android:focusable="true"
-            android:src="@drawable/ic_baseline_filter_alt_24"
+            android:src="@drawable/ic_baseline_settings_24"
             app:tint="?colorFilterButton">
 
         </ImageView>
