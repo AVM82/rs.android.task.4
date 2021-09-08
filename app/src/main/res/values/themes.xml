@@ -14,6 +14,14 @@
         <!-- Customize your theme here. -->
         <item name="colorFilterButton">@color/blue_700</item>
         <item name="toolbarTitleTextColor">@color/black</item>
-        <item name="backgroundItemColor">@color/recycle_view_item</item>
+        <!--        todo remove this if not needed        <item name="backgroundItemColor">@color/recycle_view_item</item>-->
     </style>
+
+    <style name="AppModifyButtonStyle" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="backgroundTint">@color/fill_color_modify_button</item>
+        <item name="strokeColor">@color/stroke_color_modify_button</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="rippleColor">@color/stroke_color_modify_button</item>
+    </style>
+
 </resources>

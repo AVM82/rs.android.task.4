@@ -8,4 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="recycle_view_item">#F5F5F5</color>
+    <color name="fill_color_modify_button">#D5E8D4</color>
+    <color name="stroke_color_modify_button">#82B366</color>
+    <color name="fill_color_modify_button_night">#013614</color>
+    <color name="stroke_color_modify_button_night">#51B479</color>
 </resources>

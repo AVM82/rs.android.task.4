@@ -1,8 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Rsandroidtask4" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Rsandroidtask4" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/blue_200</item>
+        <item name="colorPrimary">@color/blue_500</item>
         <item name="colorPrimaryVariant">@color/blue_700</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
@@ -14,6 +14,13 @@
         <!-- Customize your theme here. -->
         <item name="colorFilterButton">@color/blue_700</item>
         <item name="toolbarTitleTextColor">@color/black</item>
-        <item name="backgroundItemColor">@color/recycle_view_item</item>
+        <!--  todo remove this if not needed         <item name="backgroundItemColor">@color/recycle_view_item</item>-->
+    </style>
+
+    <style name="AppModifyButtonStyle" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="backgroundTint">@color/fill_color_modify_button_night</item>
+        <item name="strokeColor">@color/stroke_color_modify_button_night</item>
+        <item name="android:textColor">@color/stroke_color_modify_button_night</item>
+        <item name="rippleColor">@color/stroke_color_modify_button_night</item>
     </style>
 </resources>
