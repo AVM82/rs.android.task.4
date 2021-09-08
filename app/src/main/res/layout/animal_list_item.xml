@@ -1,32 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/item_margin">
 
-    <TextView
-        android:id="@+id/captionTextView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        style="@style/TextAppearance.MaterialComponents.Caption"
-        tools:text="Name: Some name"
-        />
-    <TextView
-        android:id="@+id/captionTextView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        style="@style/TextAppearance.MaterialComponents.Caption"
-        tools:text="Name: Some name"
-        />
-    <TextView
-        android:id="@+id/captionTextView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        style="@style/TextAppearance.MaterialComponents.Caption"
-        tools:text="Name: Some name"
-        />
+        android:background="?backgroundItemColor"
+        android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:gravity="center"
+            tools:text="Name: Some name" />
+
+        <TextView
+            android:id="@+id/age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:text="Age: Some age" />
+
+        <TextView
+            android:id="@+id/Breed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:text="Breed: Some breed" />
+
+    </LinearLayout>
 </androidx.cardview.widget.CardView>

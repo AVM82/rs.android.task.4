@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">rs.android.task.4</string>
+    <string name="app_name">Animals</string>
+    <string name="add_new_animal">Add new animal</string>
+    <string name="set_filter_to_animals_list">Set filter to animals list</string>
 </resources>
