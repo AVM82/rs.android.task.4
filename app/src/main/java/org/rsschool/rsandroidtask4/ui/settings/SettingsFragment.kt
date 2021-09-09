@@ -18,8 +18,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        container?.context?.setTheme(R.style.PreferenceTheme)
-        
+//        container?.context?.setTheme(R.style.PreferenceTheme)
+
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 }

@@ -10,4 +10,6 @@
     <string name="order_title">Order by</string>
     <string name="provider_title">Provider</string>
     <string name="use_cursor_summary">By default, room is used as the provider, but you can use cursors.</string>
+    <string name="add_animal_title">Add New Animal</string>
+    <string name="add_animal_button_caption">ADD</string>
 </resources>
