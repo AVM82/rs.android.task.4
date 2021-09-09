@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import org.rsschool.rsandroidtask4.R
 import org.rsschool.rsandroidtask4.databinding.MainFragmentBinding
-import org.rsschool.rsandroidtask4.ui.addAnimals.AddAnimalsFragment
+import org.rsschool.rsandroidtask4.ui.modify.ModifyAnimalsFragment
 import org.rsschool.rsandroidtask4.ui.settings.SettingsActivity
 
 class MainFragment : Fragment() {
@@ -36,7 +36,7 @@ class MainFragment : Fragment() {
         views {
             addAnimal.setOnClickListener {
                 showFragment(
-                    AddAnimalsFragment.newInstance(
+                    ModifyAnimalsFragment.newInstance(
                         title = getString(R.string.add_animal_title),
                         captionButton = getString(R.string.add_animal_button_caption)
                     )

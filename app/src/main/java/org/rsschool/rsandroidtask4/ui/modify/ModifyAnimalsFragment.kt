@@ -1,18 +1,18 @@
-package org.rsschool.rsandroidtask4.ui.addAnimals
+package org.rsschool.rsandroidtask4.ui.modify
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import org.rsschool.rsandroidtask4.databinding.AddAnimalFragmentBinding
+import org.rsschool.rsandroidtask4.databinding.ModifyAnimalFragmentBinding
 
 private const val ARG_TITLE = "title"
 private const val ARG_BUTTON_CAPTION = "button_caption"
 
-class AddAnimalsFragment : Fragment() {
+class ModifyAnimalsFragment : Fragment() {
 
-    private var _binding: AddAnimalFragmentBinding? = null
+    private var _binding: ModifyAnimalFragmentBinding? = null
     private val binding
         get() = requireNotNull(_binding)
 
@@ -20,7 +20,7 @@ class AddAnimalsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        AddAnimalFragmentBinding.inflate(inflater).also { _binding = it }
+        ModifyAnimalFragmentBinding.inflate(inflater).also { _binding = it }
         return binding.root
     }
 
@@ -43,7 +43,7 @@ class AddAnimalsFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance(title: String, captionButton: String) =
-            AddAnimalsFragment().apply {
+            ModifyAnimalsFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_TITLE, title)
                     putString(ARG_BUTTON_CAPTION, captionButton)
@@ -51,5 +51,5 @@ class AddAnimalsFragment : Fragment() {
             }
     }
 
-    private fun <T> views(block: AddAnimalFragmentBinding.() -> T): T? = binding.block()
+    private fun <T> views(block: ModifyAnimalFragmentBinding.() -> T): T? = binding.block()
 }
