@@ -16,6 +16,14 @@ class ModifyAnimalsFragment : Fragment() {
     private val binding
         get() = requireNotNull(_binding)
 
+    //todo remove this
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        val inflater = TransitionInflater.from(requireContext())
+//        enterTransition = inflater.inflateTransition(R.transition.slide_right)
+
+//    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

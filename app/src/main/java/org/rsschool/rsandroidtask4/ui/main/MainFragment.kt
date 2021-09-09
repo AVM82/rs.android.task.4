@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import org.rsschool.rsandroidtask4.R
 import org.rsschool.rsandroidtask4.databinding.MainFragmentBinding
@@ -52,10 +54,11 @@ class MainFragment : Fragment() {
     }
 
     private fun showFragment(fragment: Fragment) {
-        activity?.supportFragmentManager?.beginTransaction()
-            ?.addToBackStack("addAnimals")
-            ?.replace(R.id.main_container, fragment)
-            ?.commit()
+        activity?.supportFragmentManager?.commit {
+            addToBackStack("addAnimals")
+            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            replace(R.id.main_container, fragment)
+        }
     }
 
     private fun <T> views(block: MainFragmentBinding.() -> T): T? = binding.block()
