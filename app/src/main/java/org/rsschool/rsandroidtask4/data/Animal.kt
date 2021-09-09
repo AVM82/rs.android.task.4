@@ -1,4 +1,4 @@
-package org.rsschool.rsandroidtask4.model
+package org.rsschool.rsandroidtask4.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "animals")
 data class Animal(
     @PrimaryKey(autoGenerate = true)
-    val it:Int = 0,
+    val it: Int = 0,
     val name: String,
     val age: Int,
     val breed: String
