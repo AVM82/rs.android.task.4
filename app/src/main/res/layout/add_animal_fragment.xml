@@ -14,9 +14,6 @@
         android:layout_height="wrap_content"
         android:background="?colorPrimary"
         android:fitsSystemWindows="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_baseline_arrow_back_24">
 
         <TextView

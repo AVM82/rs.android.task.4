@@ -1,5 +1,6 @@
 package org.rsschool.rsandroidtask4.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.fragment.app.viewModels
 import org.rsschool.rsandroidtask4.R
 import org.rsschool.rsandroidtask4.databinding.MainFragmentBinding
 import org.rsschool.rsandroidtask4.ui.addAnimals.AddAnimalsFragment
+import org.rsschool.rsandroidtask4.ui.settings.SettingsActivity
 
 class MainFragment : Fragment() {
 
@@ -32,19 +34,27 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         views {
-            addAnimal.setOnClickListener { showAddAnimalsFragment() }
+            addAnimal.setOnClickListener {
+                showFragment(
+                    AddAnimalsFragment.newInstance(
+                        title = getString(R.string.add_animal_title),
+                        captionButton = getString(R.string.add_animal_button_caption)
+                    )
+                )
+            }
+            settings.setOnClickListener { showSettingsActivity() }
         }
     }
 
-    private fun showAddAnimalsFragment() {
+    private fun showSettingsActivity() {
+        val intent = Intent(activity, SettingsActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun showFragment(fragment: Fragment) {
         activity?.supportFragmentManager?.beginTransaction()
             ?.addToBackStack("addAnimals")
-            ?.replace(
-                R.id.container, AddAnimalsFragment.newInstance(
-                    title = getString(R.string.add_animal_title),
-                    captionButton = getString(R.string.add_animal_button_caption)
-                )
-            )
+            ?.replace(R.id.main_container, fragment)
             ?.commit()
     }
 
