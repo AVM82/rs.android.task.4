@@ -11,6 +11,7 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import org.rsschool.rsandroidtask4.R
 import org.rsschool.rsandroidtask4.databinding.MainFragmentBinding
+import org.rsschool.rsandroidtask4.ui.adapter.AnimalsAdapter
 import org.rsschool.rsandroidtask4.ui.modify.ModifyAnimalsFragment
 import org.rsschool.rsandroidtask4.ui.settings.SettingsActivity
 
@@ -21,6 +22,8 @@ class MainFragment : Fragment() {
     }
 
     private val viewModel: MainViewModel by viewModels()
+    private val adapter: AnimalsAdapter?
+        get() = views { animalsList.adapter as? AnimalsAdapter }
     private var _binding: MainFragmentBinding? = null
     private val binding
         get() = requireNotNull(_binding)
@@ -36,6 +39,7 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         views {
+            animalsList.adapter = adapter
             addAnimal.setOnClickListener {
                 showFragment(
                     ModifyAnimalsFragment.newInstance(
