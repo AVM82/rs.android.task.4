@@ -36,10 +36,8 @@ class ModifyAnimalsFragment : Fragment() {
         views {
             toolbarTitle.text = arguments?.getString(ARG_TITLE)
             modifyButton.text = arguments?.getString(ARG_BUTTON_CAPTION)
-            toolbar.setNavigationOnClickListener {
-                activity?.supportFragmentManager?.popBackStack()
-            }
-            modifyButton.setOnClickListener{
+            toolbar.setNavigationOnClickListener { goBack() }
+            modifyButton.setOnClickListener {
                 val animal = Animal(
                     name = name.editText?.text.toString(),
                     age = age.editText?.text.toString().toInt(),
@@ -50,8 +48,13 @@ class ModifyAnimalsFragment : Fragment() {
         }
     }
 
+    private fun goBack() {
+        activity?.supportFragmentManager?.popBackStack()
+    }
+
     private fun save(animal: Animal) {
         viewModel.save(animal)
+        goBack()
     }
 
     override fun onDestroyView() {

@@ -2,7 +2,6 @@ package org.rsschool.rsandroidtask4.ui.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,13 +15,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.rsschool.rsandroidtask4.R
 import org.rsschool.rsandroidtask4.data.Animal
 import org.rsschool.rsandroidtask4.databinding.MainFragmentBinding
-import org.rsschool.rsandroidtask4.repository.room.AnimalsDataBaseRoom
 import org.rsschool.rsandroidtask4.ui.AppState
 import org.rsschool.rsandroidtask4.ui.adapter.AnimalsAdapter
 import org.rsschool.rsandroidtask4.ui.modify.ModifyAnimalsFragment
@@ -74,7 +70,7 @@ class MainFragment : Fragment() {
             }
         }
 
-        viewLifecycleOwner.lifecycleScope.launch{
+        viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.appState.collect(::renderAppState)
             }
@@ -82,15 +78,18 @@ class MainFragment : Fragment() {
     }
 
     private fun renderAnimalsList(animals: List<Animal>) {
-        adapter?.submitList(animals)
+        adapter?.run {
+            submitList(animals)
+            viewModel.toggleEmptyListImage(animals.isEmpty())
+        }
     }
 
-    private fun renderAppState(state: AppState){
+    private fun renderAppState(state: AppState) {
         renderEmptyAnimalImage(state.isEmptyAnimalsList)
     }
 
     private fun renderEmptyAnimalImage(isEmpty: Boolean) {
-        views{
+        views {
             emptyList.isVisible = isEmpty
         }
     }
