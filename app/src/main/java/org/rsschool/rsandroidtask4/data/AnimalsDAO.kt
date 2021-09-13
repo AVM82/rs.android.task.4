@@ -4,14 +4,15 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
-import androidx.room.Query
+import androidx.room.RawQuery
+import androidx.sqlite.db.SupportSQLiteQuery
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface AnimalsDAO {
 
-    @Query("SELECT * FROM animals WHERE age like :param")
-    fun getAll(param: String): Flow<List<Animal>>
+    @RawQuery(observedEntities = [Animal::class])
+    fun getAll(query: SupportSQLiteQuery): Flow<List<Animal>>
 
     @Insert(onConflict = REPLACE)
     suspend fun add(animal: Animal)

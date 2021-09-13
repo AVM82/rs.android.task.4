@@ -23,19 +23,24 @@ class MainViewModel @Inject constructor(
     application: Application
 ) : ViewModel() {
 
-    private val _appState = MutableStateFlow(AppState())
-
-    val animalsListFlow =
-        repository.getAll(pref.getString(application.getString(R.string.KEY_PREF_ORDER), "name").toString())
-            .shareIn(viewModelScope, SharingStarted.Eagerly, 1)
+    private val _appState = MutableStateFlow(
+        AppState(
+            order = pref.getString(
+                application.getString(R.string.KEY_PREF_ORDER),
+                "name"
+            ).toString()
+        )
+    )
     val appState: Flow<AppState> = _appState
+    val animalsListFlow =
+        repository.getAll(_appState.value.order)
+            .shareIn(viewModelScope, SharingStarted.Eagerly, 1)
 
     fun toggleEmptyListImage(isEmptyList: Boolean) {
         updateAppState { copy(isEmptyAnimalsList = isEmptyList) }
     }
 
     private fun updateAppState(modifier: AppState.() -> AppState) {
-
         _appState.value = _appState.value.modifier()
     }
 
