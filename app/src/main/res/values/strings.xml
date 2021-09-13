@@ -23,4 +23,5 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="edit_animal">Edit Animal</string>
     <string name="confirm">Confirm</string>
+    <string name="delete_animal">Delete animal %s</string>
 </resources>

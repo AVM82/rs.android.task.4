@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_delete"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="?colorSecondaryVariant"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+    <ImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:contentDescription="@string/delete_animal"
+        app:srcCompat="@drawable/ic_baseline_close_24"
+        app:tint="@color/white" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        tools:text="@string/delete_animal" />
+</LinearLayout>

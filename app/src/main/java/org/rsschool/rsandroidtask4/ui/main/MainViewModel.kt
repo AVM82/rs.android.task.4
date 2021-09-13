@@ -34,4 +34,10 @@ class MainViewModel @Inject constructor(private val repository: Repository) : Vi
             repository.save(animal)
         }
     }
+
+    fun delete(animal: Animal) {
+        viewModelScope.launch {
+            repository.delete(animal)
+        }
+    }
 }
