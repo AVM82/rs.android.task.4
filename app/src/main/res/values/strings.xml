@@ -13,15 +13,12 @@
     <string name="add_animal_title">Add New Animal</string>
     <string name="add_animal_button_caption">ADD</string>
     <string name="title_activity_main2">MainActivity2</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!--Strings used for modify animal fragment-->
     <string name="edit_animal">Edit Animal</string>
     <string name="confirm">Confirm</string>
+    <!--Strings used for animals list fragment-->
     <string name="delete_animal">Delete animal %s</string>
+    <string name="name_animal">Name: %s</string>
+    <string name="age_animal">Age: %s</string>
+    <string name="breed_animal">Breed: %s</string>
 </resources>

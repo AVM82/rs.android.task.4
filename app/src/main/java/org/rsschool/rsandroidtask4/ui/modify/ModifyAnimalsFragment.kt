@@ -60,7 +60,7 @@ class ModifyAnimalsFragment : Fragment() {
             null -> {
                 Animal(
                     name = name.editText?.text.toString(),
-                    age = age.editText?.text.toString().toInt(),
+                    age = age.editText?.text.toString().toDouble(),
                     breed = breed.editText?.text.toString()
                 )
             }
@@ -68,7 +68,7 @@ class ModifyAnimalsFragment : Fragment() {
                 Animal(
                     id = animal.id,
                     name = name.editText?.text.toString(),
-                    age = age.editText?.text.toString().toInt(),
+                    age = age.editText?.text.toString().toDouble(),
                     breed = breed.editText?.text.toString()
                 )
             }

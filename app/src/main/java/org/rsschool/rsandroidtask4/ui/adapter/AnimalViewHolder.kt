@@ -3,6 +3,7 @@ package org.rsschool.rsandroidtask4.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import org.rsschool.rsandroidtask4.R
 import org.rsschool.rsandroidtask4.data.Animal
 import org.rsschool.rsandroidtask4.databinding.AnimalListItemBinding
 
@@ -18,13 +19,11 @@ class AnimalViewHolder(private val binding: AnimalListItemBinding) :
         itemView.run {
             setOnClickListener { listener.onClickListener(item) }
             setOnLongClickListener { listener.onLongClickListener(item) }
-        }
-
-        views {
-            name.text = item.name
-            age.text = item.age.toString()
-            breed.text = item.breed
-
+            views {
+                name.text = context.getString(R.string.name_animal, item.name)
+                age.text = context.getString(R.string.age_animal, item.age.toString())
+                breed.text = context.getString(R.string.breed_animal, item.breed)
+            }
         }
     }
 

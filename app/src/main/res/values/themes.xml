@@ -14,7 +14,6 @@
         <!-- Customize your theme here. -->
         <item name="colorFilterButton">@color/blue_700</item>
         <item name="toolbarTitleTextColor">@color/black</item>
-        <!--        todo remove this if not needed        <item name="backgroundItemColor">@color/recycle_view_item</item>-->
     </style>
 
     <style name="AppModifyButtonStyle" parent="Widget.MaterialComponents.Button.OutlinedButton">
