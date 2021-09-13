@@ -21,4 +21,6 @@
     <string name="name_animal">Name: %s</string>
     <string name="age_animal">Age: %s</string>
     <string name="breed_animal">Breed: %s</string>
+    <string name="KEY_PREF_ORDER">order</string>
+    <string name="KEY_PREF_PROVIDER">provider</string>
 </resources>

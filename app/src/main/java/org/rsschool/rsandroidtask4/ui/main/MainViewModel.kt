@@ -1,5 +1,7 @@
 package org.rsschool.rsandroidtask4.ui.main
 
+import android.app.Application
+import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -8,17 +10,24 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.launch
+import org.rsschool.rsandroidtask4.R
 import org.rsschool.rsandroidtask4.data.Animal
 import org.rsschool.rsandroidtask4.repository.Repository
 import org.rsschool.rsandroidtask4.ui.AppState
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
+class MainViewModel @Inject constructor(
+    private val repository: Repository,
+    pref: SharedPreferences,
+    application: Application
+) : ViewModel() {
 
     private val _appState = MutableStateFlow(AppState())
 
-    val animalsListFlow = repository.getAll().shareIn(viewModelScope, SharingStarted.Eagerly, 1)
+    val animalsListFlow =
+        repository.getAll(pref.getString(application.getString(R.string.KEY_PREF_ORDER), "name").toString())
+            .shareIn(viewModelScope, SharingStarted.Eagerly, 1)
     val appState: Flow<AppState> = _appState
 
     fun toggleEmptyListImage(isEmptyList: Boolean) {
@@ -26,6 +35,7 @@ class MainViewModel @Inject constructor(private val repository: Repository) : Vi
     }
 
     private fun updateAppState(modifier: AppState.() -> AppState) {
+
         _appState.value = _appState.value.modifier()
     }
 
