@@ -14,11 +14,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.rsschool.rsandroidtask4.R
+import org.rsschool.rsandroidtask4.data.Animal
 import org.rsschool.rsandroidtask4.databinding.MainFragmentBinding
 import org.rsschool.rsandroidtask4.repository.room.AnimalsDataBaseRoom
 import org.rsschool.rsandroidtask4.ui.AppState
@@ -26,6 +28,7 @@ import org.rsschool.rsandroidtask4.ui.adapter.AnimalsAdapter
 import org.rsschool.rsandroidtask4.ui.modify.ModifyAnimalsFragment
 import org.rsschool.rsandroidtask4.ui.settings.SettingsActivity
 
+@AndroidEntryPoint
 class MainFragment : Fragment() {
 
     companion object {
@@ -44,13 +47,16 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         MainFragmentBinding.inflate(inflater).also { _binding = it }
+
+        println("ViewModal -> $viewModel")
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         views {
-            animalsList.adapter = adapter
+            animalsList.adapter = AnimalsAdapter()
             addAnimal.setOnClickListener {
                 showFragment(
                     ModifyAnimalsFragment.newInstance(
@@ -62,11 +68,21 @@ class MainFragment : Fragment() {
             settings.setOnClickListener { showSettingsActivity() }
         }
 
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.animalsListFlow.collect(::renderAnimalsList)
+            }
+        }
+
         viewLifecycleOwner.lifecycleScope.launch{
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.appState.collect(::renderAppState)
             }
         }
+    }
+
+    private fun renderAnimalsList(animals: List<Animal>) {
+        adapter?.submitList(animals)
     }
 
     private fun renderAppState(state: AppState){

@@ -5,24 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
+import org.rsschool.rsandroidtask4.data.Animal
 import org.rsschool.rsandroidtask4.databinding.ModifyAnimalFragmentBinding
+import org.rsschool.rsandroidtask4.ui.main.MainViewModel
 
 private const val ARG_TITLE = "title"
 private const val ARG_BUTTON_CAPTION = "button_caption"
 
+@AndroidEntryPoint
 class ModifyAnimalsFragment : Fragment() {
 
     private var _binding: ModifyAnimalFragmentBinding? = null
     private val binding
         get() = requireNotNull(_binding)
 
-    //todo remove this
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        val inflater = TransitionInflater.from(requireContext())
-//        enterTransition = inflater.inflateTransition(R.transition.slide_right)
-
-//    }
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +39,19 @@ class ModifyAnimalsFragment : Fragment() {
             toolbar.setNavigationOnClickListener {
                 activity?.supportFragmentManager?.popBackStack()
             }
+            modifyButton.setOnClickListener{
+                val animal = Animal(
+                    name = name.editText?.text.toString(),
+                    age = age.editText?.text.toString().toInt(),
+                    breed = breed.editText?.text.toString()
+                )
+                save(animal)
+            }
         }
+    }
+
+    private fun save(animal: Animal) {
+        viewModel.save(animal)
     }
 
     override fun onDestroyView() {
