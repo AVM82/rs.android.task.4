@@ -2,6 +2,7 @@ package org.rsschool.rsandroidtask4.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,12 +21,13 @@ import org.rsschool.rsandroidtask4.R
 import org.rsschool.rsandroidtask4.data.Animal
 import org.rsschool.rsandroidtask4.databinding.MainFragmentBinding
 import org.rsschool.rsandroidtask4.ui.AppState
+import org.rsschool.rsandroidtask4.ui.adapter.AnimalViewHolder
 import org.rsschool.rsandroidtask4.ui.adapter.AnimalsAdapter
 import org.rsschool.rsandroidtask4.ui.modify.ModifyAnimalsFragment
 import org.rsschool.rsandroidtask4.ui.settings.SettingsActivity
 
 @AndroidEntryPoint
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), AnimalViewHolder.ItemListener {
 
     companion object {
         fun newInstance() = MainFragment()
@@ -52,7 +54,7 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         views {
-            animalsList.adapter = AnimalsAdapter()
+            animalsList.adapter = AnimalsAdapter(this@MainFragment)
             addAnimal.setOnClickListener {
                 showFragment(
                     ModifyAnimalsFragment.newInstance(
@@ -101,7 +103,7 @@ class MainFragment : Fragment() {
 
     private fun showFragment(fragment: Fragment) {
         activity?.supportFragmentManager?.commit {
-            addToBackStack("addAnimals")
+            addToBackStack("modifyAnimal")
             setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             replace(R.id.main_container, fragment)
         }
@@ -112,5 +114,20 @@ class MainFragment : Fragment() {
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+    }
+
+    override fun onClickListener(item: Animal) {
+        showFragment(
+            ModifyAnimalsFragment.newInstance(
+                title = getString(R.string.edit_animal),
+                captionButton = getString(R.string.confirm),
+                item = item
+            )
+        )
+    }
+
+    override fun onLongClickListener(item: Animal): Boolean {
+        Log.d("[onLongClickListener]", "onLongClickListener")
+        return true
     }
 }

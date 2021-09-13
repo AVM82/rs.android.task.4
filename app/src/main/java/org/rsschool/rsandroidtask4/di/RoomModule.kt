@@ -12,14 +12,13 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class RoomModule() {
+class RoomModule {
 
     @Singleton
     @Provides
     fun provideRoomDb(application: Application): AnimalsDataBaseRoom = databaseBuilder(
         application, AnimalsDataBaseRoom::class.java, "animals_db"
     ).allowMainThreadQueries().fallbackToDestructiveMigration().build()
-
 
     @Singleton
     @Provides
