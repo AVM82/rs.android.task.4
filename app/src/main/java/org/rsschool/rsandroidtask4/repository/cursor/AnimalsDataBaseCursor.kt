@@ -9,7 +9,7 @@ import android.util.Log
 import androidx.sqlite.db.SupportSQLiteQuery
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import org.rsschool.rsandroidtask4.data.Animal
 import org.rsschool.rsandroidtask4.data.AnimalsDAO
@@ -40,9 +40,9 @@ class AnimalsDataBaseCursor(context: Context) : AnimalsDataBase, AnimalsDAO, SQL
     override val animalsDAO: AnimalsDAO
         get() = this
 
-    override fun getAll(query: SupportSQLiteQuery): Flow<List<Animal>> {
+    override fun getAll(query: SupportSQLiteQuery): Flow<List<Animal>> = flow {
         val cursor = readableDatabase.rawQuery(query.sql, null)
-        val animalList = mutableListOf<Animal>()
+        val animalList = ArrayList<Animal>(cursor.count)
         try {
             if (cursor.moveToFirst()) {
                 do {
@@ -60,28 +60,25 @@ class AnimalsDataBaseCursor(context: Context) : AnimalsDataBase, AnimalsDAO, SQL
         } finally {
             cursor.close()
         }
-        return flowOf(animalList).flowOn(Dispatchers.IO)
-    }
+        emit(animalList)
+    }.flowOn(Dispatchers.IO)
 
     override suspend fun add(animal: Animal) {
-        when (animal.id) {
-            0 -> insertAnimal(animal)
-            else -> updateAnimal()
-        }
+        writableDatabase.insertWithOnConflict(
+            AnimalsDataBase.TABLE_NAME,
+            null,
+            getValues(animal),
+            SQLiteDatabase.CONFLICT_REPLACE
+        )
     }
 
-    private fun updateAnimal() {
-        TODO("Not yet implemented")
-    }
-
-    private fun insertAnimal(animal: Animal) {
-        val value = ContentValues().apply {
+    private fun getValues(animal: Animal) =
+        ContentValues().apply {
+            put(AnimalsDataBase.COLUMN_TABLE_ANIMALS_ID, animal.id)
             put(AnimalsDataBase.COLUMN_TABLE_ANIMALS_NAME, animal.name)
             put(AnimalsDataBase.COLUMN_TABLE_ANIMALS_AGE, animal.age)
             put(AnimalsDataBase.COLUMN_TABLE_ANIMALS_BREED, animal.breed)
         }
-        writableDatabase.insert(AnimalsDataBase.TABLE_NAME, null, value)
-    }
 
     override suspend fun delete(animal: Animal) {
         val selection = "${AnimalsDataBase.COLUMN_TABLE_ANIMALS_ID} = ?"

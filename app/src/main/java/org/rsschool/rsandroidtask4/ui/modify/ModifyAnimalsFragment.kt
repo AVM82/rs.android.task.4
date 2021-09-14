@@ -50,7 +50,7 @@ class ModifyAnimalsFragment : Fragment() {
             modifyButton.text = arguments?.getString(ARG_BUTTON_CAPTION)
             toolbar.setNavigationOnClickListener { goBack() }
             modifyButton.setOnClickListener {
-                save(makeAnimal(animal))
+                modify(makeAnimal(animal))
             }
         }
     }
@@ -79,7 +79,7 @@ class ModifyAnimalsFragment : Fragment() {
         activity?.supportFragmentManager?.popBackStack()
     }
 
-    private fun save(animal: Animal) {
+    private fun modify(animal: Animal) {
         viewModel.save(animal)
         goBack()
     }

@@ -5,6 +5,8 @@ import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -61,7 +63,6 @@ class MainViewModel @Inject constructor(
 
     init {
         pref.registerOnSharedPreferenceChangeListener(preferenceChangeListener)
-
     }
 
     private fun fetchAnimalsList() = repository.getAll(_appState.value.order)
@@ -80,13 +81,13 @@ class MainViewModel @Inject constructor(
     }
 
     fun save(animal: Animal) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.save(animal)
         }
     }
 
     fun delete(animal: Animal) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.delete(animal)
         }
     }
