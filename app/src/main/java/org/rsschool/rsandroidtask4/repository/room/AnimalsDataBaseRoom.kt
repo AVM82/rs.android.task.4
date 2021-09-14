@@ -5,5 +5,9 @@ import androidx.room.RoomDatabase
 import org.rsschool.rsandroidtask4.data.Animal
 import org.rsschool.rsandroidtask4.repository.AnimalsDataBase
 
-@Database(entities = [Animal::class], version = 1, exportSchema = false)
+@Database(
+    entities = [Animal::class],
+    version = AnimalsDataBase.DATABASE_VERSION,
+    exportSchema = false
+)
 abstract class AnimalsDataBaseRoom : RoomDatabase(), AnimalsDataBase

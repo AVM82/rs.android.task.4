@@ -3,15 +3,17 @@ package org.rsschool.rsandroidtask4.data
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import org.rsschool.rsandroidtask4.repository.AnimalsDataBase
 
-@Entity(tableName = "animals")
+@Entity(tableName = AnimalsDataBase.TABLE_NAME)
 data class Animal(
+    @ColumnInfo(name = AnimalsDataBase.COLUMN_TABLE_ANIMALS_ID)
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    @ColumnInfo(name = "name")
+    @ColumnInfo(name = AnimalsDataBase.COLUMN_TABLE_ANIMALS_NAME)
     val name: String,
-    @ColumnInfo(name = "age")
+    @ColumnInfo(name = AnimalsDataBase.COLUMN_TABLE_ANIMALS_AGE)
     val age: Double,
-    @ColumnInfo(name = "breed")
+    @ColumnInfo(name = AnimalsDataBase.COLUMN_TABLE_ANIMALS_BREED)
     val breed: String
 )
