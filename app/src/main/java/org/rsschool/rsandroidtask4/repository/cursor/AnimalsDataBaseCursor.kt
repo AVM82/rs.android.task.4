@@ -63,12 +63,12 @@ class AnimalsDataBaseCursor(context: Context) : AnimalsDataBase, AnimalsDAO, SQL
         emit(animalList)
     }.flowOn(Dispatchers.IO)
 
-    override fun add(animal: Animal): Long = writableDatabase.insertWithOnConflict(
-            AnimalsDataBase.TABLE_NAME,
-            null,
-            getValues(animal),
-            SQLiteDatabase.CONFLICT_REPLACE
-        )
+    override suspend fun add(animal: Animal): Long = writableDatabase.insertWithOnConflict(
+        AnimalsDataBase.TABLE_NAME,
+        null,
+        getValues(animal),
+        SQLiteDatabase.CONFLICT_REPLACE
+    )
 
     private fun getValues(animal: Animal) =
         ContentValues().apply {

@@ -15,7 +15,7 @@ interface AnimalsDAO {
     fun getAll(query: SupportSQLiteQuery): Flow<List<Animal>>
 
     @Insert(onConflict = REPLACE)
-    fun add(animal: Animal): Long
+    suspend fun add(animal: Animal): Long
 
     @Delete
     suspend fun delete(animal: Animal)

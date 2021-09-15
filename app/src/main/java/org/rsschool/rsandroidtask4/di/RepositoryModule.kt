@@ -14,7 +14,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class RoomModule {
+class RepositoryModule {
 
     @Singleton
     @Provides
@@ -31,7 +31,6 @@ class RoomModule {
 
     @Singleton
     @Provides
-    fun repo(db: AnimalsDataBaseRoom) = Repository(db)
-//    fun repo(db: AnimalsDataBaseCursor) = Repository(db)
+    fun repo(room: AnimalsDataBaseRoom, cursor: AnimalsDataBaseCursor) = Repository(room, cursor)
 
 }
