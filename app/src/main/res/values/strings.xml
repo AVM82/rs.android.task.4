@@ -2,8 +2,8 @@
     <string name="app_name">Animals</string>
     <string name="add_new_animal">Add new animal</string>
     <string name="set_filter_to_animals_list">Set filter to animals list</string>
-    <string name="name">Name</string>
-    <string name="age">Age</string>
+    <string name="name">Name<font color='#FF0000'>*</font></string>
+    <string name="age">Age<font color='#FF0000'>*</font></string>
     <string name="breed">Breed</string>
     <!-- Preference Titles -->
     <string name="settings_title">Settings</string>
@@ -24,4 +24,5 @@
     <string name="KEY_PREF_ORDER">order</string>
     <string name="KEY_PREF_PROVIDER">provider</string>
     <string name="KEY_PREF_LAST_UPDATE">lastUpdate</string>
+    <string name="empty_error_text">Should not be empty</string>
 </resources>
