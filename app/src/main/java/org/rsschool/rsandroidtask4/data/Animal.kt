@@ -9,7 +9,7 @@ import org.rsschool.rsandroidtask4.repository.AnimalsDataBase
 data class Animal(
     @ColumnInfo(name = AnimalsDataBase.COLUMN_TABLE_ANIMALS_ID)
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    val id: Int? = null,
     @ColumnInfo(name = AnimalsDataBase.COLUMN_TABLE_ANIMALS_NAME)
     val name: String,
     @ColumnInfo(name = AnimalsDataBase.COLUMN_TABLE_ANIMALS_AGE)

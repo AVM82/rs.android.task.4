@@ -30,7 +30,7 @@ class RoomModule {
 
     @Singleton
     @Provides
-    fun repo(db: AnimalsDataBaseRoom) = Repository(db)
-//    fun repo(db: AnimalsDataBaseCursor) = Repository(db)
+//    fun repo(db: AnimalsDataBaseRoom) = Repository(db)
+    fun repo(db: AnimalsDataBaseCursor) = Repository(db)
 
 }

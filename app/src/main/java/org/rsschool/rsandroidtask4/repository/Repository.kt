@@ -4,7 +4,6 @@ import androidx.sqlite.db.SimpleSQLiteQuery
 import kotlinx.coroutines.flow.Flow
 import org.rsschool.rsandroidtask4.data.Animal
 import javax.inject.Inject
-
 class Repository @Inject constructor(private val db: AnimalsDataBase) {
     private val dao get() = db.animalsDAO
 
@@ -13,7 +12,8 @@ class Repository @Inject constructor(private val db: AnimalsDataBase) {
         return dao.getAll(query)
     }
 
-    suspend fun save(animal: Animal) = dao.add(animal)
+    fun save(animal: Animal): Long = dao.add(animal)
 
     suspend fun delete(animal: Animal) = dao.delete(animal)
 }
+

@@ -16,7 +16,7 @@ interface AnimalsDataBase {
         const val CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS $TABLE_NAME (" +
                 " $COLUMN_TABLE_ANIMALS_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                 " $COLUMN_TABLE_ANIMALS_NAME TEXT," +
-                " $COLUMN_TABLE_ANIMALS_AGE REAL" +
+                " $COLUMN_TABLE_ANIMALS_AGE REAL," +
                 " $COLUMN_TABLE_ANIMALS_BREED TEXT);"
     }
 }

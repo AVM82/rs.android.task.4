@@ -2,13 +2,12 @@ package org.rsschool.rsandroidtask4.ui.main
 
 import android.app.Application
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import org.rsschool.rsandroidtask4.R
 import org.rsschool.rsandroidtask4.data.Animal
@@ -37,7 +36,8 @@ class MainViewModel @Inject constructor(
         )
     )
     val appState: Flow<AppState> = _appState
-    var animalsListFlow = fetchAnimalsList()
+    private val _animalsListFlow =  MutableStateFlow<List<Animal>>(emptyList())
+    var animalsListFlow:StateFlow<List<Animal>> = _animalsListFlow
 
     private val preferenceChangeListener =
         SharedPreferences.OnSharedPreferenceChangeListener { prefs, key ->
@@ -51,7 +51,6 @@ class MainViewModel @Inject constructor(
                             ).toString()
                         )
                     }
-                    animalsListFlow = fetchAnimalsList()
                 }
                 keyPrefProvider -> {
                     updateAppState {
@@ -63,9 +62,21 @@ class MainViewModel @Inject constructor(
 
     init {
         pref.registerOnSharedPreferenceChangeListener(preferenceChangeListener)
+        appState.onEach {updateAnimalsList() }.launchIn(viewModelScope)
     }
 
-    private fun fetchAnimalsList() = repository.getAll(_appState.value.order)
+    private fun updateAnimalsList() {
+        Log.d("updateAnimalsList", "Start")
+        Log.d("updateAnimalsList", _animalsListFlow.value.toString())
+        repository.getAll(_appState.value.order).onEach { _animalsListFlow.value = it }.launchIn(viewModelScope)
+        Log.d("updateAnimalsList", "END")
+        Log.d("updateAnimalsList", _animalsListFlow.value.toString())
+    }
+
+//    private fun fetch() {
+//        animalsListFlow = repository.getAll(_appState.value.order)
+//    }
+
 
     override fun onCleared() {
         super.onCleared()
@@ -83,12 +94,15 @@ class MainViewModel @Inject constructor(
     fun save(animal: Animal) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.save(animal)
+            updateAnimalsList()
+
         }
     }
 
     fun delete(animal: Animal) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.delete(animal)
+            updateAnimalsList()
         }
     }
 }
