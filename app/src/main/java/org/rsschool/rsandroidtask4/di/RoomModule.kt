@@ -26,11 +26,12 @@ class RoomModule {
 
     @Singleton
     @Provides
-    fun provideCursorDb(application: Application): AnimalsDataBaseCursor = AnimalsDataBaseCursor(application)
+    fun provideCursorDb(application: Application): AnimalsDataBaseCursor =
+        AnimalsDataBaseCursor(application)
 
     @Singleton
     @Provides
-//    fun repo(db: AnimalsDataBaseRoom) = Repository(db)
-    fun repo(db: AnimalsDataBaseCursor) = Repository(db)
+    fun repo(db: AnimalsDataBaseRoom) = Repository(db)
+//    fun repo(db: AnimalsDataBaseCursor) = Repository(db)
 
 }

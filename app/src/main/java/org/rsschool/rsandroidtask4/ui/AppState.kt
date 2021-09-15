@@ -4,4 +4,5 @@ data class AppState(
     val isEmptyAnimalsList: Boolean = true,
     val order: String = "name",
     val useCursor: Boolean = false,
+    val lastUpdate: Long? = null
 )
