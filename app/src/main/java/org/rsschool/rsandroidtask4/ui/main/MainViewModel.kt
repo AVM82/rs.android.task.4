@@ -13,6 +13,7 @@ import org.rsschool.rsandroidtask4.R
 import org.rsschool.rsandroidtask4.data.Animal
 import org.rsschool.rsandroidtask4.repository.AnimalsDataBase
 import org.rsschool.rsandroidtask4.repository.Repository
+import org.rsschool.rsandroidtask4.repository.StrategyDAO
 import org.rsschool.rsandroidtask4.ui.AppState
 import java.util.*
 import javax.inject.Inject
@@ -67,7 +68,16 @@ class MainViewModel @Inject constructor(
 
     init {
         pref.registerOnSharedPreferenceChangeListener(preferenceChangeListener)
-        appState.onEach { updateAnimalsList() }.launchIn(viewModelScope)
+        appState.onEach { controlState((it)) }.launchIn(viewModelScope)
+    }
+
+    private fun controlState(state: AppState) {
+        if (state.useCursor) {
+            repository.setStrategy(StrategyDAO.CURSOR)
+        } else {
+            repository.setStrategy(StrategyDAO.ROOM)
+        }
+        updateAnimalsList()
     }
 
     private fun updateAnimalsList() {
@@ -92,7 +102,6 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             repository.save(animal)
             pref.edit().putLong(keyPrefLastUpdate, Calendar.getInstance().timeInMillis).apply()
-
         }
     }
 

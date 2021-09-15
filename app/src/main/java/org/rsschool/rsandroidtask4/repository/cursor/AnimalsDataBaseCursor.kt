@@ -41,6 +41,7 @@ class AnimalsDataBaseCursor(context: Context) : AnimalsDataBase, AnimalsDAO, SQL
         get() = this
 
     override fun getAll(query: SupportSQLiteQuery): Flow<List<Animal>> = flow {
+        Log.d("DAO", "CURSOR GET")
         val cursor = readableDatabase.rawQuery(query.sql, null)
         val animalList = ArrayList<Animal>(cursor.count)
         try {
@@ -63,12 +64,15 @@ class AnimalsDataBaseCursor(context: Context) : AnimalsDataBase, AnimalsDAO, SQL
         emit(animalList)
     }.flowOn(Dispatchers.IO)
 
-    override suspend fun add(animal: Animal): Long = writableDatabase.insertWithOnConflict(
-        AnimalsDataBase.TABLE_NAME,
-        null,
-        getValues(animal),
-        SQLiteDatabase.CONFLICT_REPLACE
-    )
+    override suspend fun add(animal: Animal): Long {
+        Log.d("DAO", "CURSOR ADD")
+        return writableDatabase.insertWithOnConflict(
+            AnimalsDataBase.TABLE_NAME,
+            null,
+            getValues(animal),
+            SQLiteDatabase.CONFLICT_REPLACE
+        )
+    }
 
     private fun getValues(animal: Animal) =
         ContentValues().apply {
@@ -79,6 +83,7 @@ class AnimalsDataBaseCursor(context: Context) : AnimalsDataBase, AnimalsDAO, SQL
         }
 
     override suspend fun delete(animal: Animal) {
+        Log.d("DAO", "CURSOR DELETE")
         val selection = "${AnimalsDataBase.COLUMN_TABLE_ANIMALS_ID} = ?"
         val selectionArgs = arrayOf(animal.id.toString())
         writableDatabase.delete(AnimalsDataBase.TABLE_NAME, selection, selectionArgs)

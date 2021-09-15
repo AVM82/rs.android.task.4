@@ -1,5 +1,6 @@
 package org.rsschool.rsandroidtask4.repository
 
+import android.util.Log
 import androidx.sqlite.db.SimpleSQLiteQuery
 import kotlinx.coroutines.flow.Flow
 import org.rsschool.rsandroidtask4.data.Animal
