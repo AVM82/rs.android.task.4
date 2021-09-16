@@ -85,7 +85,6 @@ class MainFragment : Fragment(), AnimalViewHolder.ItemListener {
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                Log.d("view", "viewModel.animalsListFlow")
                 viewModel.animalsListFlow.collect(::renderAnimalsList)
             }
         }
@@ -98,7 +97,6 @@ class MainFragment : Fragment(), AnimalViewHolder.ItemListener {
     }
 
     private fun renderAnimalsList(animals: List<Animal>) {
-        Log.d("List",animals.toString())
         adapter?.run {
             submitList(animals)
             viewModel.toggleEmptyListImage(animals.isEmpty())
