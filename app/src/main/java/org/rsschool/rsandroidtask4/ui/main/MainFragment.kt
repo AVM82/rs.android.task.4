@@ -2,7 +2,6 @@ package org.rsschool.rsandroidtask4.ui.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,17 +13,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.preference.PreferenceManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.rsschool.rsandroidtask4.R
 import org.rsschool.rsandroidtask4.data.Animal
 import org.rsschool.rsandroidtask4.databinding.BottomMenuBinding
 import org.rsschool.rsandroidtask4.databinding.MainFragmentBinding
-import org.rsschool.rsandroidtask4.di.PreferenceManagerModule
 import org.rsschool.rsandroidtask4.ui.AppState
 import org.rsschool.rsandroidtask4.ui.adapter.AnimalViewHolder
 import org.rsschool.rsandroidtask4.ui.adapter.AnimalsAdapter

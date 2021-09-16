@@ -103,7 +103,6 @@ class ModifyAnimalsFragment : Fragment() {
             }
         }
 
-
     private fun goBack() {
         activity?.supportFragmentManager?.popBackStack()
     }
